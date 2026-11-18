@@ -1,0 +1,26 @@
+{
+  "name": "concurrent-install",
+  "tier": "fast",
+  "plan": 19,
+  "about": "An install is already running: the second exits 10 and changes nothing.",
+  "steps": [
+    {
+      "op": "live_lock"
+    },
+    {
+      "run": {
+        "expect_rc": 10
+      }
+    },
+    {
+      "check": "output",
+      "has": [
+        "already running"
+      ]
+    },
+    {
+      "check": "absent",
+      "path": "{code}"
+    }
+  ]
+}

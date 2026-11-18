@@ -1,0 +1,22 @@
+{
+  "name": "stale-path-node-in-program-files",
+  "tier": "fast",
+  "plan": 16,
+  "about": "Node is only in a program folder the registry names, not on this window's PATH: it is found.",
+  "programs": {
+    "node": "registry"
+  },
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "prelude": "done"
+      }
+    }
+  ]
+}

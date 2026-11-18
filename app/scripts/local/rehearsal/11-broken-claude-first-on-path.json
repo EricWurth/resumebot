@@ -1,0 +1,36 @@
+{
+  "name": "broken-claude-first-on-path",
+  "tier": "fast",
+  "plan": 11,
+  "about": "A broken claude comes first on the PATH and a working one second: the second is used.",
+  "claude": [
+    "broken",
+    "working"
+  ],
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "text",
+      "path": "{data}/install/install.log",
+      "has": [
+        "claude-bin-1"
+      ]
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    }
+  ]
+}

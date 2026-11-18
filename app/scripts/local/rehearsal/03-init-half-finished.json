@@ -1,0 +1,38 @@
+{
+  "name": "init-half-finished",
+  "tier": "fast",
+  "plan": 3,
+  "about": "Only the settings file exists: the script finishes the database, the starter settings and the four secrets, once.",
+  "steps": [
+    {
+      "op": "file",
+      "path": "{data}/.env",
+      "text": "JOBSEARCH_OWNER=Rehearsal Owner\nJOBSEARCH_TIMEZONE=America/New_York\nRESUMEBOT_APP_URL=http://127.0.0.1:{port}\n"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "exists",
+      "path": "{data}/resumebot.db"
+    },
+    {
+      "check": "sql",
+      "db": "{data}/resumebot.db",
+      "query": "SELECT count(*) FROM profile_versions WHERE kind='settings'",
+      "equals": 1
+    },
+    {
+      "check": "secrets",
+      "whole": 4
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "init": "done"
+      }
+    }
+  ]
+}

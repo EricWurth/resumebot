@@ -1,0 +1,44 @@
+{
+  "name": "run-twice",
+  "tier": "fast",
+  "plan": 2,
+  "about": "A second run says already for every step that has nothing left to do and changes no file in the code or data folders.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "op": "snapshot",
+      "label": "after-first"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "fetch": "already",
+        "stop": "already",
+        "backup": "already",
+        "replace": "already",
+        "setup": "already",
+        "init": "already",
+        "start": "already",
+        "signin": "already",
+        "connect": "already"
+      }
+    },
+    {
+      "check": "unchanged",
+      "label": "after-first"
+    },
+    {
+      "check": "state",
+      "equals": "done"
+    }
+  ]
+}

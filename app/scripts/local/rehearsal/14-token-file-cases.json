@@ -1,0 +1,69 @@
+{
+  "name": "token-file-cases",
+  "tier": "slow",
+  "plan": 14,
+  "about": "A cut-short or glued token file is signed in anew; a good one is left alone.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "count",
+      "what": "signin_runs",
+      "equals": 1
+    },
+    {
+      "op": "file",
+      "path": "{data}/secrets/claude-oauth-token",
+      "text": "sk-ant-oat01-short"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "count",
+      "what": "signin_runs",
+      "equals": 2
+    },
+    {
+      "op": "file",
+      "path": "{data}/secrets/claude-oauth-token",
+      "hex": "736b2d616e742d6f617430312d61616161616161616161616161616161616161616161616161616161616161616161616161616161736b2d616e742d6f617430312d62626262626262626262626262626262626262626262626262626262626262626262626262626262"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "count",
+      "what": "signin_runs",
+      "equals": 3
+    },
+    {
+      "op": "file",
+      "path": "{data}/secrets/claude-oauth-token",
+      "hex": "736b2d616e742d6f617430312d7676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "count",
+      "what": "signin_runs",
+      "equals": 3
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "signin": "already"
+      }
+    }
+  ]
+}

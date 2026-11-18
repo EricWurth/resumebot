@@ -1,0 +1,36 @@
+{
+  "name": "door-wrong-token",
+  "tier": "fast",
+  "plan": 10,
+  "about": "A door registered with another token is repaired.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "op": "claude_door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "not-this-installs-token"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    }
+  ]
+}

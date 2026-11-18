@@ -1,0 +1,40 @@
+{
+  "name": "path-with-non-ascii-name",
+  "tier": "slow",
+  "plan": 8,
+  "about": "The whole root has Cyrillic characters and a numero sign in its name: no traceback, the recorded shortcut script holds the data folder, and doctor passes.",
+  "root": "unicode",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "recorded",
+      "kind": "powershell",
+      "has": [
+        "{data}"
+      ]
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "doctor": "done",
+        "shortcut": "done"
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "proxy-variables-set",
+  "tier": "fast",
+  "plan": 15,
+  "about": "Proxy variables are set: every health check still reaches the app on this PC.",
+  "env": {
+    "HTTP_PROXY": "http://127.0.0.1:9",
+    "HTTPS_PROXY": "http://127.0.0.1:9",
+    "ALL_PROXY": "http://127.0.0.1:9"
+  },
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "doctor": "done",
+        "start": "done"
+      }
+    }
+  ]
+}

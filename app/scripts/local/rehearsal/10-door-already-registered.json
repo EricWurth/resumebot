@@ -1,0 +1,36 @@
+{
+  "name": "door-already-registered",
+  "tier": "fast",
+  "plan": 10,
+  "about": "A door that is registered and right is left as it is.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "connect": "already"
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    }
+  ]
+}

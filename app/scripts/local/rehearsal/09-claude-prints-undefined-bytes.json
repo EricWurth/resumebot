@@ -1,0 +1,31 @@
+{
+  "name": "claude-prints-undefined-bytes",
+  "tier": "fast",
+  "plan": 9,
+  "about": "Claude Code prints bytes the PC's code page leaves undefined: connect and doctor do not crash and the doors stay registered.",
+  "steps": [
+    {
+      "op": "claude_behavior",
+      "behavior": {
+        "junk_bytes": true
+      }
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    }
+  ]
+}

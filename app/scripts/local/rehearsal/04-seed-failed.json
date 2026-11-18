@@ -1,0 +1,26 @@
+{
+  "name": "seed-failed",
+  "tier": "fast",
+  "plan": 4,
+  "about": "The database file exists but holds no starter settings (a stopped init): the next run seeds it.",
+  "steps": [
+    {
+      "op": "empty_database"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "sql",
+      "db": "{data}/resumebot.db",
+      "query": "SELECT count(*) FROM profile_versions WHERE kind='settings'",
+      "equals": 1
+    },
+    {
+      "check": "secrets",
+      "whole": 4
+    }
+  ]
+}

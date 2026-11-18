@@ -1,0 +1,8 @@
+{
+  "name": "interrupted-at-each-step",
+  "tier": "slow",
+  "plan": 20,
+  "about": "The script is ended after each step in turn: the next run reaches the same end state as a run never interrupted.",
+  "interrupt_each_step": true,
+  "steps": []
+}

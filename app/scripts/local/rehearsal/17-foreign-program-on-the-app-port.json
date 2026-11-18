@@ -1,0 +1,28 @@
+{
+  "name": "foreign-program-on-the-app-port",
+  "tier": "fast",
+  "plan": 17,
+  "about": "Another program answers 200 on the app's port: it is not taken for the app.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "op": "stop_app"
+    },
+    {
+      "op": "foreign"
+    },
+    {
+      "run": {
+        "expect_rc": 6
+      }
+    },
+    {
+      "check": "state",
+      "equals": "failed"
+    }
+  ]
+}

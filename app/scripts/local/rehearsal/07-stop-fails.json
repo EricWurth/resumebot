@@ -1,0 +1,28 @@
+{
+  "name": "stop-fails",
+  "tier": "fast",
+  "plan": 7,
+  "about": "The app will not stop: no backup is taken from a live database, and the run ends with exit 4.",
+  "steps": [
+    {
+      "op": "old_install"
+    },
+    {
+      "op": "flag",
+      "flag": "stop_fails"
+    },
+    {
+      "run": {
+        "expect_rc": 4
+      }
+    },
+    {
+      "check": "absent",
+      "path": "{data}/backups/*"
+    },
+    {
+      "check": "state",
+      "equals": "failed"
+    }
+  ]
+}

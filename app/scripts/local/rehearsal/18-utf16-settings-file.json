@@ -1,0 +1,26 @@
+{
+  "name": "utf16-settings-file",
+  "tier": "fast",
+  "plan": 18,
+  "about": "The settings file was saved as UTF-16: one sentence says so, with no traceback.",
+  "steps": [
+    {
+      "op": "file",
+      "path": "{data}/.env",
+      "text": "JOBSEARCH_OWNER=Rehearsal Owner\n",
+      "encoding": "utf-16"
+    },
+    {
+      "run": {
+        "expect_rc": 5
+      }
+    },
+    {
+      "check": "text",
+      "path": "{data}/install/install.log",
+      "has": [
+        "not saved as UTF-8"
+      ]
+    }
+  ]
+}

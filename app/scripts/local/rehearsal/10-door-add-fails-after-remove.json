@@ -1,0 +1,42 @@
+{
+  "name": "door-add-fails-after-remove",
+  "tier": "fast",
+  "plan": 10,
+  "about": "The replacing add is refused after the old door was removed: the old door is put back, and the run says so.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "op": "claude_door",
+      "name": "resumebot-owner",
+      "url": "http://127.0.0.1:9/mcp-owner/",
+      "token": "secret:owner-token"
+    },
+    {
+      "op": "claude_behavior",
+      "behavior": {
+        "reject_url": "{port}/mcp-owner"
+      }
+    },
+    {
+      "run": {
+        "expect_rc": 8
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "http://127.0.0.1:9/mcp-owner/"
+    },
+    {
+      "check": "text",
+      "path": "{data}/install/install.log",
+      "has": [
+        "put back"
+      ]
+    }
+  ]
+}

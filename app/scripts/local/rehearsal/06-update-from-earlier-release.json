@@ -1,0 +1,56 @@
+{
+  "name": "update-from-earlier-release",
+  "tier": "slow",
+  "plan": 6,
+  "about": "An older release is installed with a live-style database: the update stops it, backs the data up (it passes quick_check), moves to the newest tag, keeps the old code folder, and loses no data.",
+  "steps": [
+    {
+      "op": "old_install"
+    },
+    {
+      "op": "hold_wal"
+    },
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "text",
+      "path": "{code}/VERSION",
+      "has": [
+        "{version}"
+      ]
+    },
+    {
+      "check": "exists",
+      "path": "{root}/Programs/resumebot-old-*"
+    },
+    {
+      "check": "sql",
+      "db": "{data}/backups/install-*/resumebot.db",
+      "query": "PRAGMA quick_check",
+      "equals": "ok"
+    },
+    {
+      "check": "sql",
+      "db": "{data}/backups/install-*/resumebot.db",
+      "query": "SELECT count(*) FROM rh_probe",
+      "equals": 1
+    },
+    {
+      "check": "sql",
+      "db": "{data}/resumebot.db",
+      "query": "SELECT count(*) FROM profile_versions WHERE kind='settings'",
+      "equals": 1
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "stop": "done",
+        "backup": "done",
+        "replace": "done"
+      }
+    }
+  ]
+}

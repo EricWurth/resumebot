@@ -1,0 +1,31 @@
+{
+  "name": "second-install-start-task",
+  "tier": "fast",
+  "plan": 21,
+  "about": "Two installs on one PC: the second install's start leaves the first's start task as it was and registers its own beside it.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "op": "start_task"
+    },
+    {
+      "op": "start_task",
+      "data": "{root}/second-data"
+    },
+    {
+      "check": "task",
+      "name": "resumebot-start",
+      "has": [
+        "{data}"
+      ],
+      "lacks": [
+        "second-data"
+      ],
+      "count": 2
+    }
+  ]
+}

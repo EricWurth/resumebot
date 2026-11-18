@@ -1,0 +1,60 @@
+{
+  "name": "fresh-install",
+  "tier": "slow",
+  "plan": 1,
+  "about": "A fresh install runs every step to its end; both doors, the shortcut and the secrets are in place.",
+  "steps": [
+    {
+      "run": {
+        "expect_rc": 0
+      }
+    },
+    {
+      "check": "state",
+      "equals": "done"
+    },
+    {
+      "check": "steps",
+      "expect": {
+        "fetch": "done",
+        "stop": "skipped",
+        "backup": "skipped",
+        "replace": "done",
+        "setup": "done",
+        "init": "done",
+        "start": "done",
+        "signin": "done",
+        "connect": "done",
+        "shortcut": "done",
+        "doctor": "done"
+      }
+    },
+    {
+      "check": "door",
+      "name": "resumebot-owner",
+      "url": "{app}/mcp-owner/",
+      "token": "owner-token"
+    },
+    {
+      "check": "door",
+      "name": "resumebot-browser",
+      "url": "{engine}/mcp-browser/",
+      "token": "browser-token"
+    },
+    {
+      "check": "recorded",
+      "kind": "powershell",
+      "has": [
+        "{data}"
+      ]
+    },
+    {
+      "check": "exists",
+      "path": "{data}/resumebot.db"
+    },
+    {
+      "check": "secrets",
+      "whole": 4
+    }
+  ]
+}
